@@ -1,4 +1,6 @@
 package com.example.photographer.business.datasource.local
 
-class UsersLocalDataSource {
+import javax.inject.Inject
+
+class UsersLocalDataSource @Inject constructor() {
 }

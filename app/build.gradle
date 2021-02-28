@@ -24,9 +24,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_URL", gradleProperties['API_URL']
+            buildConfigField "String", "API_AUTH_USERNAME", gradleProperties['API_AUTH_USERNAME']
+            buildConfigField "String", "API_AUTH_PASSWORD", gradleProperties['API_AUTH_PASSWORD']
         }
         debug {
             buildConfigField "String", "API_URL", gradleProperties['API_URL']
+            buildConfigField "String", "API_AUTH_USERNAME", gradleProperties['API_AUTH_USERNAME']
+            buildConfigField "String", "API_AUTH_PASSWORD", gradleProperties['API_AUTH_PASSWORD']
         }
     }
     compileOptions {
