@@ -26,11 +26,13 @@ class UsersAdapter(val userList: ArrayList<User>, val onItemClick: (user: User) 
             Picasso.get().load(it).into(holder.photo)
         }
         holder.photo.setOnClickListener{ onItemClick.invoke(user) }
+        holder.heart.setOnClickListener{ holder.heart.isSelected = true }
     }
 
     class UserVH(view: View): RecyclerView.ViewHolder(view) {
         val photo: ImageView = view.findViewById(R.id.photo)
         val name: TextView = view.findViewById(R.id.name)
+        val heart: ImageView = view.findViewById(R.id.heart)
     }
 
     override fun getItemCount(): Int {

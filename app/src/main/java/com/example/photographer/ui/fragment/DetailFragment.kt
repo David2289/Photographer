@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.photographer.R
 import com.example.photographer.business.model.User
 import com.example.photographer.databinding.DetailFragmentBinding
@@ -28,7 +29,7 @@ class DetailFragment: Fragment() {
         return binding.root
     }
 
-    fun configUI() {
+    private fun configUI() {
         user.image?.let {
             Picasso.get()
                 .load(it)
@@ -36,9 +37,9 @@ class DetailFragment: Fragment() {
         }
 
         binding.name.text = user.firstName
-        user.facebook?.let { binding.facebook.text = it }
-        user.instagram?.let { binding.instagram.text = it }
-        user.webpage?.let { binding.webpage.text = it }
+        binding.desc.text = user.description
+        binding.heart.setOnClickListener { binding.heart.isSelected = true }
+        binding.icBack.setOnClickListener { Navigation.findNavController(binding.root).navigate(R.id.action_detail_to_list) }
     }
 
 

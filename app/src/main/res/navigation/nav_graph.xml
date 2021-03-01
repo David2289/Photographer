@@ -23,6 +23,9 @@
         android:id="@+id/detail_screen"
         android:name="com.example.photographer.ui.fragment.DetailFragment"
         tools:layout="@layout/detail_fragment">
+        <action
+            android:id="@+id/action_detail_to_list"
+            app:popUpTo="@id/list_screen"/>
     </fragment>
 
 </navigation>
