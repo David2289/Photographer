@@ -38,7 +38,7 @@ class DetailFragment: Fragment() {
 
         binding.name.text = user.firstName
         binding.desc.text = user.description
-        binding.heart.setOnClickListener { binding.heart.isSelected = true }
+        binding.heart.setOnClickListener { binding.heart.isSelected = !binding.heart.isSelected }
         binding.icBack.setOnClickListener { Navigation.findNavController(binding.root).navigate(R.id.action_detail_to_list) }
     }
 

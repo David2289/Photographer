@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Photographer</string>
+
+    <string name="menu_bottom_scan">Scan</string>
+    <string name="menu_bottom_festivals">Festivals</string>
+    <string name="menu_bottom_news">News</string>
+    <string name="menu_bottom_favs">Favs</string>
+
 </resources>
