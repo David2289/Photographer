@@ -30,8 +30,8 @@ class DataSourceModule {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(BasicAuthInterceptor(BuildConfig.API_AUTH_USERNAME, BuildConfig.API_AUTH_PASSWORD))
                 .addInterceptor(httpLoggingInterceptor) //httpLoggingInterceptor allows to log json body.
+                .addInterceptor(BasicAuthInterceptor(BuildConfig.API_AUTH_USERNAME, BuildConfig.API_AUTH_PASSWORD))
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .build()
