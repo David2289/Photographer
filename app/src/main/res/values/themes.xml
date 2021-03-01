@@ -4,7 +4,7 @@
         <!-- PRIMARY -->
         <item name="colorPrimary">@color/trade_wind</item>
         <item name="colorPrimaryDark">@color/smalt_blue</item>
-        <item name="colorOnPrimary">@color/black_white</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- SECONDARY -->
         <item name="colorSecondary">@color/melrose</item>
 
@@ -13,7 +13,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
         <!-- Background color. -->
-        <item name="android:windowBackground">@color/black_white</item>
+        <item name="android:windowBackground">@color/white</item>
         <!-- Texts default style. -->
         <item name="android:textViewStyle">@style/Font.Regular.Body.Gray</item>
         <!--<item name="android:buttonStyle">@style/Button.Secondary</item>--> <!-- project buttons default style (pressed_state doesn't work by this way) -->

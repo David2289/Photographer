@@ -25,11 +25,10 @@ class UsersAdapter(val userList: ArrayList<User>, val onItemClick: (user: User) 
         user.image.let {
             Picasso.get().load(it).into(holder.photo)
         }
-        holder.view.setOnClickListener{ onItemClick.invoke(user) }
+        holder.photo.setOnClickListener{ onItemClick.invoke(user) }
     }
 
     class UserVH(view: View): RecyclerView.ViewHolder(view) {
-        val view: View = view
         val photo: ImageView = view.findViewById(R.id.photo)
         val name: TextView = view.findViewById(R.id.name)
     }

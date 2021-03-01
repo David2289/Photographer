@@ -4,20 +4,195 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.ListFragment">
+        android:focusableInTouchMode="true">
+
+        <!-- region ****** HEADER ****** -->
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/layout_landing_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@android:color/transparent"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/layout_landing_collapsingtoolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="180dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <!-- Toolbar is not used bcs can't has more than one line -->
+                <!-- Topbar is not out of CollapsingToolbarLayout bcs wouldn't has background -->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/header_painted_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/header_bottom_content"
+                        android:background="@color/apricot">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/header_top_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:paddingStart="@dimen/commons_15dp"
+                            android:paddingEnd="@dimen/commons_15dp">
+
+                            <ImageView
+                                android:id="@+id/img_landing_back_icon"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:contentDescription="@null"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:src="@drawable/ic_camera" />
+
+                            <ImageView
+                                android:id="@+id/img_landing_search_icon"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:padding="7dp"
+                                android:contentDescription="@null"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:background="@drawable/circle"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/header_title_content"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:padding="@dimen/commons_15dp">
+
+                            <TextView
+                                android:id="@+id/title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/heart"
+                                app:layout_constraintBottom_toTopOf="@+id/date"
+                                android:ellipsize="end"
+                                android:maxLines="3"
+                                style="@style/Font.Bold.Title.Black"
+                                android:textSize="20sp"
+                                android:text="INCADAQUÉS 2020" />
+
+                            <TextView
+                                android:id="@+id/date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/heart"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:ellipsize="end"
+                                android:maxLines="3"
+                                style="@style/Font.Regular.Body.Black"
+                                android:text="15-25 october 2020" />
+
+                            <ImageView
+                                android:id="@+id/heart"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:padding="7dp"
+                                android:contentDescription="@null"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:src="@drawable/ic_heart_fill" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/header_bottom_content"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:paddingTop="@dimen/commons_15dp"
+                        android:padding="@dimen/commons_15dp"
+                        android:background="@color/black_white">
+
+                        <ImageView
+                            android:id="@+id/program_button"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:contentDescription="@null"
+                            android:layout_marginStart="@dimen/commons_10dp"
+                            android:layout_marginEnd="@dimen/commons_10dp"
+                            android:src="@drawable/ic_calendar"
+                            android:background="@drawable/circle"
+                            android:padding="@dimen/commons_10dp"/>
+
+                        <ImageView
+                            android:id="@+id/artworks_button"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:layout_constraintStart_toEndOf="@+id/program_button"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:contentDescription="@null"
+                            android:layout_marginStart="@dimen/commons_10dp"
+                            android:layout_marginEnd="@dimen/commons_10dp"
+                            android:src="@drawable/ic_frame"
+                            android:background="@drawable/circle"
+                            android:padding="@dimen/commons_10dp"/>
+
+                        <ImageView
+                            android:id="@+id/map_button"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:layout_constraintStart_toEndOf="@+id/artworks_button"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:contentDescription="@null"
+                            android:layout_marginStart="@dimen/commons_10dp"
+                            android:layout_marginEnd="@dimen/commons_10dp"
+                            android:src="@drawable/ic_pin"
+                            android:background="@drawable/circle"
+                            android:padding="@dimen/commons_10dp"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <!-- region ****** LIST ****** -->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_user"
             android:paddingTop="@dimen/commons_20dp"
             android:paddingBottom="@dimen/commons_20dp"
@@ -27,6 +202,6 @@
             android:id="@+id/loading_content"
             layout="@layout/layout_loading" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
