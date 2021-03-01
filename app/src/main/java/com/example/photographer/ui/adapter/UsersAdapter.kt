@@ -10,7 +10,7 @@ import com.example.photographer.R
 import com.example.photographer.business.model.User
 import com.squareup.picasso.Picasso
 
-class UsersAdapter(val userList: ArrayList<User>): RecyclerView.Adapter<UsersAdapter.UserVH>() {
+class UsersAdapter(val userList: ArrayList<User>, val onItemClick: (user: User) -> Unit): RecyclerView.Adapter<UsersAdapter.UserVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserVH {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,9 +25,11 @@ class UsersAdapter(val userList: ArrayList<User>): RecyclerView.Adapter<UsersAda
         user.image.let {
             Picasso.get().load(it).into(holder.photo)
         }
+        holder.view.setOnClickListener{ onItemClick.invoke(user) }
     }
 
     class UserVH(view: View): RecyclerView.ViewHolder(view) {
+        val view: View = view
         val photo: ImageView = view.findViewById(R.id.photo)
         val name: TextView = view.findViewById(R.id.name)
     }

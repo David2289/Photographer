@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/list_screen">
+
+    <fragment
+        android:id="@+id/list_screen"
+        android:name="com.example.photographer.ui.fragment.ListFragment"
+        tools:layout="@layout/list_fragment">
+        <action
+            android:id="@+id/action_list_to_detail"
+            app:destination="@id/detail_screen"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail_screen"
+        android:name="com.example.photographer.ui.fragment.DetailFragment"
+        tools:layout="@layout/detail_fragment">
+    </fragment>
+
+</navigation>

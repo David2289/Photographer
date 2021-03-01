@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.photographer.R
 import com.example.photographer.business.model.User
 import com.example.photographer.business.model.Users
 import com.example.photographer.databinding.ListFragmentBinding
 import com.example.photographer.ui.adapter.UsersAdapter
+import com.example.photographer.ui.utility.helper.Constants
 import com.example.photographer.ui.viewmodel.ListViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -57,7 +60,10 @@ class ListFragment : DaggerFragment() {
 
     private fun configList() {
         userList = ArrayList()
-        adapter = UsersAdapter(userList)
+        adapter = UsersAdapter(userList, { user ->
+            val bundle = bundleOf(Constants.BUNDLE_USER to user)
+            Navigation.findNavController(binding.root).navigate(R.id.action_list_to_detail, bundle)
+        })
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.recycler.layoutManager = layoutManager
         binding.recycler.adapter = adapter

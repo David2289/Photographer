@@ -1,6 +1,7 @@
 package com.example.photographer.business.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 class User(
     @SerializedName("id")  var id: Int,
@@ -15,4 +16,4 @@ class User(
     @SerializedName("facebook")  var facebook: String?,
     @SerializedName("instagram")  var instagram: String?,
     @SerializedName("webpage")  var webpage: String?,
-)
+): Serializable
