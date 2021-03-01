@@ -1,10 +1,16 @@
 package com.example.photographer.di.module
 
+import android.app.Application
+import android.content.Context
+import androidx.room.Room
 import com.example.photographer.BuildConfig
 import com.example.photographer.business.apirest.APIService
 import com.example.photographer.business.datasource.local.UsersLocalDataSource
+import com.example.photographer.business.datasource.local.androom.dao.UserDao
+import com.example.photographer.business.datasource.local.androom.database.UserDatabase
 import com.example.photographer.business.datasource.remote.UsersRemoteDataSource
 import com.example.photographer.business.interceptor.BasicAuthInterceptor
+import com.example.photographer.ui.utility.helper.Constants
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
@@ -44,13 +50,25 @@ class DataSourceModule {
     }
 
     @Provides
+    fun provideUserDatabase(context: Application): UserDatabase {
+        return Room.databaseBuilder(context.applicationContext, UserDatabase::class.java, Constants.USER_DATABASE)
+                .allowMainThreadQueries()
+                .build()
+    }
+
+    @Provides
+    fun provideUserDao(userDatabase: UserDatabase): UserDao {
+        return userDatabase.userDao()
+    }
+
+    @Provides
     fun provideUsersRemoteDataSource(apiService: APIService): UsersRemoteDataSource {
         return UsersRemoteDataSource(apiService)
     }
 
     @Provides
-    fun provideUsersLocalDataSource(): UsersLocalDataSource {
-        return UsersLocalDataSource()
+    fun provideUsersLocalDataSource(userDao: UserDao): UsersLocalDataSource {
+        return UsersLocalDataSource(userDao)
     }
 
 }

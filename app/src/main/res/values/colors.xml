@@ -14,6 +14,7 @@
     <!-- endregion -->
 
     <!-- region ****** REDS ****** -->
+    <color name="contessa">#BF6363</color>
     <color name="amaranth">#D81B60</color>
     <color name="apricot">#ED8080</color>
     <color name="sundown">#FFA1B2</color>

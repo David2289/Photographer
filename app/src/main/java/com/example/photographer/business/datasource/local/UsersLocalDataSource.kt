@@ -1,26 +1,17 @@
 package com.example.photographer.business.datasource.local
 
-import com.example.photographer.business.utility.mapper.ModelMapper
-import io.realm.Realm
-import io.realm.RealmConfiguration
-import io.realm.RealmResults
+import com.example.photographer.business.datasource.local.androom.dao.UserDao
+import com.example.photographer.business.model.User
 import javax.inject.Inject
 
-class UsersLocalDataSource @Inject constructor() {
+class UsersLocalDataSource @Inject constructor(val userDao: UserDao) {
 
-    val config = RealmConfiguration.Builder()
-        .allowWritesOnUiThread(true)
-        .build()
-    val backgroundRealm: Realm = Realm.getInstance(config)
-
-    fun saveUser(userRealm: UserRealm) {
-        backgroundRealm.executeTransactionAsync { transactionRealm ->
-            transactionRealm.insert(userRealm)
-        }
+    fun saveUser(user: User) {
+        userDao.insert(user)
     }
 
-    fun getUsers(): RealmResults<UserRealm> {
-        return backgroundRealm.where(UserRealm::class.java).findAll()
+    fun getUsers(): List<User> {
+        return userDao.getAll()
     }
 
 }
