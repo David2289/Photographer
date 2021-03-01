@@ -1,12 +1,18 @@
 package com.example.photographer.ui.fragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.photographer.R
+import com.example.photographer.business.model.User
+import com.example.photographer.business.model.Users
+import com.example.photographer.databinding.ListFragmentBinding
+import com.example.photographer.ui.adapter.UsersAdapter
 import com.example.photographer.ui.viewmodel.ListViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -19,18 +25,42 @@ class ListFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var viewModel: ListViewModel
+    lateinit var viewModel: ListViewModel
+    lateinit var binding: ListFragmentBinding
+    lateinit var adapter: UsersAdapter
+    lateinit var userList: ArrayList<User>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ListViewModel::class.java)
+        configObserver()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.list_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
+        configList()
+        binding.loadingContent.loading.visibility = View.VISIBLE
+        viewModel.getUsers()
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ListViewModel::class.java)
-        viewModel.getUsers()
-        // TODO: Use the ViewModel
+    private fun configObserver() {
+        val observer = Observer<Users> { result ->
+            userList.clear()
+            userList.addAll(result.results)
+            adapter.notifyDataSetChanged()
+            binding.loadingContent.loading.visibility = View.GONE
+        }
+        viewModel.usersLiveData.observe(this, observer)
+    }
+
+    private fun configList() {
+        userList = ArrayList()
+        adapter = UsersAdapter(userList)
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.recycler.layoutManager = layoutManager
+        binding.recycler.adapter = adapter
     }
 
 }
